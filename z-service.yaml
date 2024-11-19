@@ -5,8 +5,9 @@ metadata:
 spec:
   selector:
     app: nginx
+  type: NodePort
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
-    NodePort: 30222
+    nodePort: 30002  # Correct capitalization

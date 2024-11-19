@@ -17,7 +17,5 @@ spec:
       containers:
       - name: nginx
         image: ghcr.io/saisairepo/sairepo:v1.2
-        ports:
-        - containerPort: 80
       imagePullSecrets:
-        - name: ghcr-registry-secret
+      - name: ghcr-registry-secret
