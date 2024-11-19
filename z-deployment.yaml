@@ -19,5 +19,5 @@ spec:
         image: ghcr.io/saisairepo/sairepo:v1.2
         ports:
         - containerPort: 80
- imagePullSecrets:
+      imagePullSecrets:
         - name: ghcr-registry-secret
