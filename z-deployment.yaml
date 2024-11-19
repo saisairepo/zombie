@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: saigwapo
+  name: saisai
   labels:
     app: nginx
 spec:
@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ghcr.io/saisairepo/sairepo:v1.2
+        image: ghcr.io/saisairepo/zombie:v1.2
       imagePullSecrets:
       - name: ghcr-registry-secret

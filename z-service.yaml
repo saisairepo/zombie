@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: saigwapo
+  name: saisai
 spec:
   selector:
     app: nginx
