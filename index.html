@@ -2,9 +2,45 @@
 <html>
 <head>
     <title>SAII!!</title>
+    <style>
+        /* Set the background color */
+        body {
+            background-color: #1e272e; /* Dark background */
+            color: #f5f6fa; /* Light text color */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+
+        /* Animation styles */
+        .animated-word {
+            display: inline-block; /* Ensures each word can animate individually */
+            margin: 0 5px;
+            animation: fadeInScale 2s infinite alternate;
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeInScale {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>Welcome to My Website</h1>
-    <p>This is SAII's Website Testing!! .</p>
+    <p>
+        <!-- Split text into words for animation -->
+        <span class="animated-word">This</span>
+        <span class="animated-word">is</span>
+        <span class="animated-word">SAII's</span>
+        <span class="animated-word">Website</span>
+        <span class="animated-word">Testing!!</span>
+    </p>
 </body>
 </html>
