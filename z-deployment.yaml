@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ghcr.io/saisairepo/zombie:v1.2
+        image: ghcr.io/saisairepo/zombie:v1.3
       imagePullSecrets:
       - name: ghcr-registry-secret
