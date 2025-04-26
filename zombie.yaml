@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: z-cont
-        image: ghcr.io/saisairepo/zombie:v1.0
+        image: ghcr.io/saisairepo/zombie:v1.3
         ports:
         - containerPort: 3000
         resources:
