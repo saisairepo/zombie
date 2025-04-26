@@ -1,4 +1,3 @@
-#---------------------------------------------------------------DEPLOYMENT---------------------------------------------------------------------------------------------
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,7 +27,6 @@ spec:
             cpu: "2"
       imagePullSecrets:
       - name: zombie-secret
-#------------------------------------------------------------------SERVICE---------------------------------------------------------------------------------------------
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +41,6 @@ spec:
     port: 80
     targetPort: 3000
   type: ClusterIP
-#-------------------------------------------------------------------INGRESS--------------------------------------------------------------------------------------------
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -52,21 +49,16 @@ metadata:
   namespace: zombie
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   ingressClassName: nginx
-  tls:
-    - hosts:
-        - oscar.mlhuillier.com
-      secretName: com-tls
   rules:
-    - host: oscar.mlhuillier.com
-      http:
-        paths:
-          - path: /zombie
-            pathType: Prefix
-            backend:
-              service:
-                name: z-service
-                port:
-                  number: 80
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: z-service
+            port:
+              number: 80
