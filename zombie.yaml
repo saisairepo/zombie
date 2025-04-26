@@ -1,0 +1,72 @@
+#---------------------------------------------------------------DEPLOYMENT---------------------------------------------------------------------------------------------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zombie
+  namespace: zombie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zombie-app
+  template:
+    metadata:
+      labels:
+        app: zombie-app
+    spec:
+      containers:
+      - name: z-cont
+        image: ghcr.io/saisairepo/zombie:v1.0
+        ports:
+        - containerPort: 3000
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+          limits:
+            memory: "4Gi"
+            cpu: "2"
+      imagePullSecrets:
+      - name: zombie-secret
+#------------------------------------------------------------------SERVICE---------------------------------------------------------------------------------------------
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: z-service
+  namespace: zombie
+spec:
+  selector:
+    app: zombie-app
+  ports:
+  - name: http
+    port: 80
+    targetPort: 3000
+  type: ClusterIP
+#-------------------------------------------------------------------INGRESS--------------------------------------------------------------------------------------------
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: z-ingress
+  namespace: zombie
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - oscar.mlhuillier.com
+      secretName: com-tls
+  rules:
+    - host: oscar.mlhuillier.com
+      http:
+        paths:
+          - path: /zombie
+            pathType: Prefix
+            backend:
+              service:
+                name: z-service
+                port:
+                  number: 80
