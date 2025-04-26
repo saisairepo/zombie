@@ -53,7 +53,19 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
+  # IP access rule
   - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: z-service
+            port:
+              number: 80
+  # FQDN access rule
+  - host: zombie.mlhuillier.com
+    http:
       paths:
       - path: /
         pathType: Prefix
